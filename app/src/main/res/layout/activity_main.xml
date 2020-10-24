@@ -10,13 +10,14 @@
     <ImageView
         android:id="@+id/parchis_emotional_iv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="400dp"
+        android:padding="5dp"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
 
-        app:srcCompat="@drawable/ruler"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/parchis" />
 
     <Button
         android:id="@+id/send_feeling_btn"
@@ -27,11 +28,10 @@
 
     <ImageView
         android:id="@+id/parchis_point_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_fiber_manual_record_black_18dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:visibility="invisible"
-        />
+        app:srcCompat="@drawable/ic_fiber_manual_record_black_18dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

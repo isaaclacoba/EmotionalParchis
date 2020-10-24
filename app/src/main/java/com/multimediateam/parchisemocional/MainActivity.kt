@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         
-        parchis_emotional_iv.setOnTouchListener { v, event ->
+        parchis_emotional_iv.setOnTouchListener { _, event ->
             Log.e(TAG,"event ${event.x}: ${event.y}")
 
             if (event.action == MotionEvent.ACTION_DOWN) {
@@ -29,12 +29,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         send_feeling_btn.setOnClickListener {
-            presenter.sendEmotion(event.x, event.y)
+            presenter.sendEmotion()
         }
     }
 
     private fun drawCircle(event: MotionEvent) {
-
         var duration = 100L
         if (parchis_point_iv.visibility != View.VISIBLE) {
             parchis_point_iv.visibility = View.VISIBLE
@@ -47,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             .setDuration(duration)
             .start()
 
+        presenter.setEmotion(event.x, event.y)
 
     }
 

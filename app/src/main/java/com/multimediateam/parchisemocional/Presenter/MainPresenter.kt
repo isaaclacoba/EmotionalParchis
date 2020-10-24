@@ -6,9 +6,13 @@ import com.multimediateam.parchisemocional.Network.NetworkClient
 class MainPresenter {
     private val networkClient: NetworkClient = NetworkClient()
 
+    var emotion: Emotion = Emotion.createEmotion(0.toFloat(),0.toFloat())
 
-    public fun sendEmotion(x: Float, y: Float) {
+    public fun setEmotion(x: Float, y: Float) {
+        emotion = Emotion.createEmotion(x, y)
+    }
 
-        networkClient.sendEmotion(Emotion.createEmotion(x, y))
+    public fun sendEmotion() {
+        networkClient.sendEmotion(emotion)
     }
 }
