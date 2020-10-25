@@ -31,6 +31,10 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/parchis_emotional_iv"
+        app:layout_constraintEnd_toEndOf="@+id/parchis_emotional_iv"
+        app:layout_constraintStart_toStartOf="@+id/parchis_emotional_iv"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_fiber_manual_record_black_18dp" />
 
 
