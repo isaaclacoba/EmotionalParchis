@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val xOffset = 40
-        val yOffset = 10
+        val yOffset = 30
         parchis_point_iv.animate()
             .x(event.x - xOffset)
             .y(event.y - yOffset)

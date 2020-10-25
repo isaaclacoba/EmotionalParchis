@@ -25,26 +25,17 @@ data class Emotion(
 
     companion object Factory {
         public fun coordinatesToEmotion(x: Float, y: Float): Triple<Long, Int, Int> {
-            val y_offset = -50
-            val x_offset = 20
-            val x_normalize_factor = 100
-            val y_normalize_factor = -100
-
-            var feeling = (((x + x_offset)/ x_normalize_factor)).toInt() - 5 // ToDO: fix
-            var energy = (((y + y_offset) / y_normalize_factor)).toInt()  + 5  // ToDO: fix
-            /*
             //This will transform the data from 0-1000-ish range to 0-10(-5 to +5)
-            val yOffset = -100
+            val yOffset = -50
             val xOffset = 20
             val xNormalizeFactor = 100 // to convert values from 0,1000 to 0,10
             val yNormalizeFactor = -100 // same but y grows upside down x
             val xNormalizeValue = -5 //converts the final result from 0,10 to -5,+5
-            val yNormalizeValue = 4 //converts the final result from 0,10 to -5,+5
+            val yNormalizeValue = +5 //converts the final result from 0,10 to -5,+5
 
-            var feeling = (((x + xOffset)/ xNormalizeFactor)).toInt() - xNormalizeValue
+            var feeling = (((x + xOffset)/ xNormalizeFactor)).toInt() + xNormalizeValue
             var energy = (((y + yOffset) / yNormalizeFactor)).toInt()  + yNormalizeValue
-
-             */
+            
             val timestamp = System.currentTimeMillis()
 
             return Triple(timestamp, feeling, energy)
