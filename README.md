@@ -1,4 +1,6 @@
 # EmotionalParchis
 Emotional Parchis
 
-Emotion/Energgy matrix for emotion diary
+Small POC to explore the RULER approach for Social and Emotional Learning.
+
+Check https://casel.org/guideprogramsruler/
