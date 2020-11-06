@@ -1,6 +1,5 @@
-package com.multimediateam.parchisemocional.Model
+package com.multimediateam.parchisemocional.model
 
-import android.util.Log
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -48,11 +47,16 @@ data class Emotion(
     }
 }
 
+
+fun List<Emotion>.toEntity() = map { it.toEntity() }
+
 @Entity
 data class EmotionRow(
     @PrimaryKey @ColumnInfo(name = "timestamp") val timestamp: Long,
     @ColumnInfo(name = "feeling")   val feeling: Int,
     @ColumnInfo(name = "energy") val energy: Int
 ) {
-    public fun toEmotion(): Emotion = Emotion(timestamp, feeling, energy)
+    public fun toDomain(): Emotion = Emotion(timestamp, feeling, energy)
 }
+
+fun List<EmotionRow>.toDomain() = map { it.toDomain()}

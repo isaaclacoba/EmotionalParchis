@@ -1,11 +1,13 @@
-package com.multimediateam.parchisemocional
+package com.multimediateam.parchisemocional.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import com.multimediateam.parchisemocional.Presenter.MainPresenter
+import com.multimediateam.parchisemocional.presenter.MainPresenter
+import com.multimediateam.parchisemocional.R
+import com.multimediateam.parchisemocional.presenter.IMainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        presenter = MainPresenter(applicationContext)
+        presenter = IMainPresenter(applicationContext)
 
         parchis_emotional_iv.setOnTouchListener { _, event ->
             Log.e(TAG,"event ${event.x}: ${event.y}")

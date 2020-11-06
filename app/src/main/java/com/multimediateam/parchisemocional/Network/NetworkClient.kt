@@ -1,7 +1,7 @@
 package com.multimediateam.parchisemocional.Network
 
 import android.util.Log
-import com.multimediateam.parchisemocional.Model.Emotion
+import com.multimediateam.parchisemocional.model.Emotion
 
 class NetworkClient {
     private val TAG: String = "NetworkClient"

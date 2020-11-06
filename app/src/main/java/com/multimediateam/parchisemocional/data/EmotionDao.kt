@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.multimediateam.parchisemocional.Model.EmotionRow
+import com.multimediateam.parchisemocional.model.EmotionRow
 
 @Dao
 interface EmotionDao {

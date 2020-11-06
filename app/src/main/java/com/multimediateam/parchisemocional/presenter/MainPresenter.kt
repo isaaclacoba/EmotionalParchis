@@ -1,17 +1,20 @@
-package com.multimediateam.parchisemocional.Presenter
+package com.multimediateam.parchisemocional.presenter
 
 import android.content.Context
 import android.util.Log
-import androidx.room.Room
-import com.multimediateam.parchisemocional.Model.Emotion
+import com.multimediateam.parchisemocional.model.Emotion
 import com.multimediateam.parchisemocional.Network.NetworkClient
-import com.multimediateam.parchisemocional.data.AppDatabase
 import com.multimediateam.parchisemocional.data.DatabaseBuilder
 import com.multimediateam.parchisemocional.data.DatabaseHelperImpl
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainPresenter(applicationContext: Context) {
+interface MainPresenter {
+    fun setEmotion(x: Float, y: Float)
+    fun sendEmotion()
+}
+
+class IMainPresenter(applicationContext: Context): MainPresenter {
     private val TAG: String = "MainPresenter"
 
     private val networkClient: NetworkClient = NetworkClient()
@@ -20,12 +23,12 @@ class MainPresenter(applicationContext: Context) {
 
     var emotion: Emotion = Emotion.createEmotion( 0.toFloat(),0.toFloat())
 
-    public fun setEmotion(x: Float, y: Float) {
+    override fun setEmotion(x: Float, y: Float) {
         emotion.update(x, y)
         Log.i(TAG, "new emotion value: ${emotion.toString()}")
     }
 
-    public fun sendEmotion() {
+    override fun sendEmotion() {
         GlobalScope.launch {
             emotionDB.insertAll(emotions = *arrayOf(emotion.toEntity()))
             networkClient.sendEmotion(emotion)

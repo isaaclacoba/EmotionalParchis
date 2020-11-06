@@ -1,6 +1,6 @@
 package com.multimediateam.parchisemocional.data
 
-import com.multimediateam.parchisemocional.Model.EmotionRow
+import com.multimediateam.parchisemocional.model.EmotionRow
 
 interface DatabaseHelper {
 
