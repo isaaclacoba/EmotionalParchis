@@ -1,25 +1,22 @@
 package com.multimediateam.parchisemocional.presenter
 
-import android.content.Context
 import android.util.Log
+import com.multimediateam.parchisemocional.MainContract
 import com.multimediateam.parchisemocional.model.Emotion
-import com.multimediateam.parchisemocional.Network.NetworkClient
+import com.multimediateam.parchisemocional.network.NetworkClient
 import com.multimediateam.parchisemocional.data.DatabaseBuilder
+import com.multimediateam.parchisemocional.data.DatabaseHelper
 import com.multimediateam.parchisemocional.data.DatabaseHelperImpl
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-interface MainPresenter {
-    fun setEmotion(x: Float, y: Float)
-    fun sendEmotion()
-}
+class IMainPresenter @Inject constructor(): MainContract.MainPresenter {
 
-class IMainPresenter(applicationContext: Context): MainPresenter {
     private val TAG: String = "MainPresenter"
 
-    private val networkClient: NetworkClient = NetworkClient()
-    private val emotionDB: DatabaseHelperImpl =
-        DatabaseHelperImpl(DatabaseBuilder.getInstance(applicationContext))
+    @Inject lateinit var networkClient: NetworkClient
+    @Inject lateinit var emotionDB: DatabaseHelper
 
     var emotion: Emotion = Emotion.createEmotion( 0.toFloat(),0.toFloat())
 

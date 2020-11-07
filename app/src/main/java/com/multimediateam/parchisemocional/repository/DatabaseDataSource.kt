@@ -3,19 +3,18 @@ package com.multimediateam.parchisemocional.repository
 import android.content.Context
 import com.multimediateam.parchisemocional.MainContract
 import com.multimediateam.parchisemocional.model.EmotionRow
-import com.multimediateam.parchisemocional.Network.NetworkClient
+import com.multimediateam.parchisemocional.network.NetworkClient
 import com.multimediateam.parchisemocional.data.DatabaseBuilder
+import com.multimediateam.parchisemocional.data.DatabaseHelper
 import com.multimediateam.parchisemocional.data.DatabaseHelperImpl
+import dagger.hilt.android.qualifiers.ActivityContext
+import javax.inject.Inject
 
 //Todo: Inject Context
-class IDatabaseDataSource(applicationContext: Context): MainContract.DatabaseDataSource {
-    private val networkClient: NetworkClient = NetworkClient()
-    private val emotionDB: DatabaseHelperImpl =
-        DatabaseHelperImpl(
-            DatabaseBuilder.getInstance(
-                applicationContext
-            )
-        )
+class IDatabaseDataSource @Inject constructor(): MainContract.DatabaseDataSource {
+
+    @Inject lateinit var networkClient: NetworkClient
+    @Inject lateinit var emotionDB: DatabaseHelper
 
     override suspend fun saveEmotion(emotionRow: EmotionRow) {
         emotionDB.insertAll(emotions = *arrayOf(emotionRow))

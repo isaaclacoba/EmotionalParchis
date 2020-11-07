@@ -5,21 +5,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import com.multimediateam.parchisemocional.presenter.MainPresenter
+import com.multimediateam.parchisemocional.MainContract
 import com.multimediateam.parchisemocional.R
-import com.multimediateam.parchisemocional.presenter.IMainPresenter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val TAG: String = "MainActivity"
 
-    private lateinit var presenter: MainPresenter
+
+    @Inject lateinit var presenter: MainContract.MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        presenter = IMainPresenter(applicationContext)
 
         parchis_emotional_iv.setOnTouchListener { _, event ->
             Log.e(TAG,"event ${event.x}: ${event.y}")

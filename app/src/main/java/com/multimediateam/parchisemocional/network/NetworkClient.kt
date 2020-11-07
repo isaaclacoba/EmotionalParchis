@@ -1,13 +1,11 @@
-package com.multimediateam.parchisemocional.Network
+package com.multimediateam.parchisemocional.network
 
 import android.util.Log
 import com.multimediateam.parchisemocional.model.Emotion
+import javax.inject.Inject
 
-class NetworkClient {
+class NetworkClient @Inject constructor() {
     private val TAG: String = "NetworkClient"
-    init {
-
-    }
 
     public fun sendEmotion(emotion: Emotion) {
         Log.i(TAG, "sending Emotion ${emotion.toString()}")
