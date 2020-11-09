@@ -23,8 +23,8 @@ data class Emotion(
     companion object Factory {
         public fun coordinatesToEmotion(x: Float, y: Float): Pair<Int, Int> {
             //This will transform the data from 0-1000-ish range to 0-10(-5 to +5)
-            val yOffset = -50
-            val xOffset = 20
+            val yOffset = 30
+            val xOffset = 0
             val xNormalizeFactor = 100 // to convert values from 0,1000 to 0,10
             val yNormalizeFactor = -100 // same but y grows upside down x
             val xNormalizeValue = -5 //converts the final result from 0,10 to -5,+5

@@ -10,6 +10,7 @@ interface MainContract {
     }
 
     interface MainInteractor {
+        suspend fun addEmotion(emotion: Emotion)
         suspend fun addEmotion(x: Float, y: Float)
         suspend fun getEmotions(): List<Emotion>
     }
@@ -22,5 +23,9 @@ interface MainContract {
     interface DatabaseDataSource {
         suspend fun saveEmotion(emotionRow: EmotionRow)
         suspend fun getEmotions(): List<EmotionRow>
+    }
+
+    interface NetworkClient {
+        suspend fun sendEmotion(emotion: Emotion)
     }
 }

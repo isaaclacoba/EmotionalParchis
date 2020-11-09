@@ -11,61 +11,61 @@ class EmotionTest {
 
     @Before
     fun setUp() {
-        mEmotion = Emotion.createEmotion(250f, 500f) //That is (feeling,energy) = (-3, +1)
+        mEmotion = Emotion.createEmotion(550f, 515f) //That is (feeling,energy) = (0,0)
     }
 
     @Test
     fun update() {
         //Check with the initial setUP configuration
-        assertEquals(mEmotion.feeling_, -3)
-        assertEquals(mEmotion.energy_,1)
+        assertEquals(0, mEmotion.feeling_)
+        assertEquals(0, mEmotion.energy_)
 
         //Update the emotion
-        mEmotion.update(550f, 600f) // (feeling,energy) = (0,0)
+        mEmotion.update(730f, 150f) // (feeling,energy) = (2,4)
 
         //Check with the new configuration
-        assert(mEmotion.energy_ == 0)
-        assert(mEmotion.feeling_ == 0)
+        assertEquals(2, mEmotion.feeling_)
+        assertEquals(4, mEmotion.energy_)
     }
 
     @Test
     fun toEntity() {
         val emotionRow = mEmotion.toEntity()
-        assertEquals(emotionRow.energy, 1)
-        assertEquals(emotionRow.feeling, -3)
+        assertEquals(0, emotionRow.energy)
+        assertEquals(0, emotionRow.feeling)
     }
 
     @Test
     fun getFeeling_() {
-        assertEquals(mEmotion.feeling_, -3)
+        assertEquals(0, mEmotion.feeling_)
     }
 
     @Test
     fun getEnergy_() {
-        assertEquals(mEmotion.energy_,1)
+        assertEquals(0, mEmotion.energy_)
     }
 
     @Test
     fun checkBoundValues() {
-        //(1040, 100) => 5 feeling ,5 energy
-        mEmotion.update(1040f, 100f)
+        //(1040, 50) => 5 feeling ,5 energy
+        mEmotion.update(1040f, 50f)
         assertEquals(mEmotion.feeling_, 5)
         assertEquals(mEmotion.energy_, 5)
 
 
-        //(1040, 1120) => 5 feeling, -5 energy
-        mEmotion.update(1040f, 1120f)
-        assertEquals(mEmotion.feeling_, 5)
-        assertEquals(mEmotion.energy_, -5)
+        //(1040, 1000) => 5 feeling, -5 energy
+        mEmotion.update(1040f, 1000f)
+        assertEquals( 5, mEmotion.feeling_)
+        assertEquals(-5, mEmotion.energy_)
 
-        //(60, 1120) => -5 feeling, -5 energy
-        mEmotion.update(60f, 1120f)
-        assertEquals(mEmotion.feeling_, -5)
-        assertEquals(mEmotion.energy_, -5)
+        //(70, 1000) => -5 feeling, -5 energy
+        mEmotion.update(70f, 1000f)
+        assertEquals( -5, mEmotion.feeling_)
+        assertEquals(-5, mEmotion.energy_)
 
-        //(70, 70) => 5 feeling, 5 energy
-        mEmotion.update(70f, 70f)
-        assertEquals(mEmotion.feeling_, -5)
-        assertEquals(mEmotion.energy_, 5)
+        //(70, 50) => -5 feeling, 5 energy
+        mEmotion.update(70f, 50f)
+        assertEquals( -5, mEmotion.feeling_)
+        assertEquals(5, mEmotion.energy_)
     }
 }

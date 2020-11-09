@@ -2,12 +2,10 @@ package com.multimediateam.parchisemocional.repository
 
 import com.multimediateam.parchisemocional.MainContract
 import com.multimediateam.parchisemocional.model.EmotionRow
-import com.multimediateam.parchisemocional.network.NetworkClient
 import com.multimediateam.parchisemocional.data.DatabaseHelper
 import javax.inject.Inject
 
 class IDatabaseDataSource @Inject constructor(
-    var networkClient: NetworkClient,
     var emotionDB: DatabaseHelper
 ): MainContract.DatabaseDataSource {
 

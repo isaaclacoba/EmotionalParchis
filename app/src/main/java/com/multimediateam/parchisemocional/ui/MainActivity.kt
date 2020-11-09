@@ -20,6 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initViews()
+    }
+
+    private fun initViews() {
         parchis_emotional_iv.setOnTouchListener { _, event ->
             Log.e(TAG,"event ${event.x}: ${event.y}")
 

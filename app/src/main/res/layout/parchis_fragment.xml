@@ -5,15 +5,22 @@
     android:id="@+id/parchis"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
     tools:context=".ui.parchis.ParchisFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="5dp"/>
+    
     <ImageView
         android:id="@+id/parchis_emotional_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
-        android:padding="5dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,1:0.95"
+        
         app:layout_constraintBottom_toTopOf="@+id/send_feeling_btn"
-        app:layout_constraintHorizontal_bias="0.0"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

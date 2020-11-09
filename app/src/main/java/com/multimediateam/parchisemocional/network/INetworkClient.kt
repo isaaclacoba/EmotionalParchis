@@ -5,7 +5,7 @@ import com.multimediateam.parchisemocional.MainContract
 import com.multimediateam.parchisemocional.model.Emotion
 import javax.inject.Inject
 
-class NetworkClient @Inject constructor(): MainContract.NetworkClient{
+class INetworkClient @Inject constructor(): MainContract.NetworkClient{
     private val TAG: String = "NetworkClient"
 
     override suspend fun sendEmotion(emotion: Emotion) {

@@ -6,27 +6,23 @@ import com.multimediateam.parchisemocional.data.DatabaseBuilder
 import com.multimediateam.parchisemocional.data.DatabaseHelper
 import com.multimediateam.parchisemocional.data.DatabaseHelperImpl
 import com.multimediateam.parchisemocional.interactor.IMainInteractor
+import com.multimediateam.parchisemocional.network.INetworkClient
 import com.multimediateam.parchisemocional.presenter.IMainPresenter
 import com.multimediateam.parchisemocional.repository.IDatabaseDataSource
+import com.multimediateam.parchisemocional.repository.IMainRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Qualifier
+import javax.inject.Singleton
 
 
 @Module(includes = [DatabaseModule::class])
 @InstallIn(ApplicationComponent::class)
 abstract class ParchisModule {
-
-    @Qualifier
-    @Retention(AnnotationRetention.RUNTIME)
-    annotation class DatabaseDataSource
-
     @Binds
     abstract fun bindMainPresenter(
         iMainPresenter: IMainPresenter
@@ -35,21 +31,40 @@ abstract class ParchisModule {
 
     @Binds
     abstract fun bindMainInteractor(
-            iMainInteractir: IMainInteractor): MainContract.MainInteractor
+            iMainInteractor: IMainInteractor): MainContract.MainInteractor
 
     @Binds
-    @DatabaseDataSource
-    abstract fun bindDataBaseDatasource(
-        databaseDataSource: IDatabaseDataSource): MainContract.DatabaseDataSource
+    abstract fun bindMainRepository(
+        iMainRepository: IMainRepository): MainContract.MainRepository
+
+    @Binds
+    abstract fun bindNetworkClient(INetworkClient: INetworkClient): MainContract.NetworkClient
+
+    @Binds
+    abstract fun bindDatabaseDataSource(
+        iDatabaseDataSource: IDatabaseDataSource): MainContract.DatabaseDataSource
 }
 
 @Module
 @InstallIn(ApplicationComponent::class)
 internal class DatabaseModule {
+
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class DatabaseDataSource
+
     @Provides
+    @Singleton
     fun providesDatabaseHelper(@ApplicationContext appContext: Context): DatabaseHelper =
         DatabaseHelperImpl(
             DatabaseBuilder.getInstance(
                 appContext
             ))
+
+    @DatabaseDataSource
+    @Singleton
+    @Provides
+    fun providesDatabaseDataSource(
+        emotionDB: DatabaseHelper): IDatabaseDataSource =
+        IDatabaseDataSource(emotionDB)
 }

@@ -7,10 +7,12 @@ import com.multimediateam.parchisemocional.model.toDomain
 import javax.inject.Inject
 
 class IMainRepository @Inject constructor(
+    private var networkClient: MainContract.NetworkClient,
     private var databaseDataSource: MainContract.DatabaseDataSource
 ): MainContract.MainRepository {
 
     override suspend fun saveEmotion(emotion: Emotion) {
+        networkClient.sendEmotion(emotion)
         databaseDataSource.saveEmotion(emotion.toEntity())
     }
 
