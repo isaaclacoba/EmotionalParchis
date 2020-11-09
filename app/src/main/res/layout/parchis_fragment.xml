@@ -7,14 +7,35 @@
     android:layout_height="match_parent"
     tools:context=".ui.parchis.ParchisFragment">
 
-    <TextView
-        android:id="@+id/message"
+    <ImageView
+        android:id="@+id/parchis_emotional_iv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ParchisFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="400dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/send_feeling_btn"
+        app:layout_constraintHorizontal_bias="0.0"
 
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/parchis" />
+
+    <Button
+        android:id="@+id/send_feeling_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_goneMarginBottom="10dp" />
+
+    <ImageView
+        android:id="@+id/parchis_point_iv"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/parchis_emotional_iv"
+        app:layout_constraintEnd_toEndOf="@+id/parchis_emotional_iv"
+        app:layout_constraintStart_toStartOf="@+id/parchis_emotional_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_fiber_manual_record_black_18dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

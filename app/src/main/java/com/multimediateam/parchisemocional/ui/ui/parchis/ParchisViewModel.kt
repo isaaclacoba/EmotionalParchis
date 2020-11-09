@@ -8,14 +8,12 @@ import com.multimediateam.parchisemocional.MainContract
 import com.multimediateam.parchisemocional.model.Emotion
 import javax.inject.Inject
 
-class ParchisViewModel() : ViewModel(), MainContract.MainPresenter {
-    @Inject
-    lateinit var mInteractor: MainContract.MainInteractor
+class ParchisViewModel(var mInteractor: MainContract.MainInteractor):
+    ViewModel(), MainContract.MainPresenter {
 
     val mEmotion: MutableLiveData<Emotion> by lazy {
         MutableLiveData<Emotion>()
     }
-
 
     override fun setEmotion(x: Float, y: Float) {
         mEmotion.value = Emotion.createEmotion( x, y)

@@ -14,8 +14,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val TAG: String = "MainActivity"
-
-
     @Inject lateinit var presenter: MainContract.MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
