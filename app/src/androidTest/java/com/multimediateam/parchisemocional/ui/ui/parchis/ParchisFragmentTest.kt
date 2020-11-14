@@ -14,6 +14,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.SmallTest
 import com.multimediateam.parchisemocional.R
+import com.multimediateam.parchisemocional.ui.parchis.ParchisFragment
 import com.multimediateam.parchisemocional.util.launchFragmentInHiltContainer
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After

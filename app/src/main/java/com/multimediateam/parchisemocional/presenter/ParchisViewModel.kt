@@ -1,4 +1,4 @@
-package com.multimediateam.parchisemocional.ui.ui.parchis
+package com.multimediateam.parchisemocional.presenter
 
 import android.content.Context
 import androidx.hilt.Assisted
@@ -23,7 +23,6 @@ class ParchisViewModel @ViewModelInject constructor(
 
     override fun setEmotion(x: Float, y: Float) {
         mEmotion.value = Emotion.createEmotion( x, y)
-
     }
 
     override fun sendEmotion() {

@@ -1,9 +1,9 @@
-package com.multimediateam.parchisemocional.ui
+package com.multimediateam.parchisemocional.ui.parchis
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.multimediateam.parchisemocional.R.*
-import com.multimediateam.parchisemocional.ui.ui.parchis.ParchisFragment
+import com.multimediateam.parchisemocional.ui.parchis.ParchisFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,7 +14,9 @@ class ParchisActivity : AppCompatActivity() {
         setContentView(layout.parchis_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(id.container, ParchisFragment.newInstance())
+                .replace(id.container,
+                    ParchisFragment.newInstance()
+                )
                 .commitNow()
         }
     }

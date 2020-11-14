@@ -1,4 +1,4 @@
-package com.multimediateam.parchisemocional.ui.ui.parchis
+package com.multimediateam.parchisemocional.ui.parchis
 
 import android.os.Bundle
 import android.util.Log
@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.multimediateam.parchisemocional.R
+import com.multimediateam.parchisemocional.presenter.ParchisViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,7 +22,8 @@ class ParchisFragment : Fragment() {
 
 
     companion object {
-        fun newInstance() = ParchisFragment()
+        fun newInstance() =
+            ParchisFragment()
     }
 
     private val viewModel: ParchisViewModel by viewModels()
