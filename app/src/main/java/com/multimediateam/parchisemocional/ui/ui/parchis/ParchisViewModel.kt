@@ -27,10 +27,10 @@ class ParchisViewModel @ViewModelInject constructor(
     }
 
     override fun sendEmotion() {
-        val emotion = mEmotion.value
+        val emotion = mEmotion.value!!
 
         GlobalScope.launch {
-            mInteractor.addEmotion(mEmotion.value!!)
+            mInteractor.addEmotion(emotion)
         }
     }
 }
