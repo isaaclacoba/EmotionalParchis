@@ -98,5 +98,5 @@ dependencies {
 
     //Bottom navigation
     implementation "com.google.android.material:material:$googleMaterialVersion"
-
+    implementation "androidx.drawerlayout:drawerlayout:1.1.1"
 }

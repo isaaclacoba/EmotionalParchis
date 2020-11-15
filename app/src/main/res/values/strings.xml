@@ -5,4 +5,6 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="add_btn">Add Emotion</string>
+    <string name="emotion_panel_label">Emotions</string>
+    <string name="emotion_pie_label">Pie chart</string>
 </resources>
