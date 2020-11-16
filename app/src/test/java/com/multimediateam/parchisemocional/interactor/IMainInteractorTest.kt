@@ -2,9 +2,11 @@ package com.multimediateam.parchisemocional.interactor
 
 import com.multimediateam.parchisemocional.MainContract
 import com.multimediateam.parchisemocional.model.Emotion
+import com.multimediateam.parchisemocional.model.Result
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -24,10 +26,18 @@ class IMainInteractorTest {
     }
 
     @Test
-    fun addEmotion() = runBlocking {
+    fun addEmotion() {
+        val result = runBlocking {
+            Mockito.`when`(mRepository.saveEmotion(Emotion.createEmotion(300f, 500f))).thenReturn(
+                Result(true, "Emotion added")
+            )
 
-        mInteractor.addEmotion(300f, 500f)
-        Mockito.verify(mRepository).saveEmotion(Emotion.createEmotion(300f, 500f))
+            val result = mInteractor.addEmotion(300f, 500f)
+            assert(result.isSucess)
+
+            Mockito.verify(mRepository).saveEmotion(Emotion.createEmotion(300f, 500f))
+        }
+
     }
 
     @Test

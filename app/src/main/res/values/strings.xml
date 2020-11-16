@@ -7,4 +7,5 @@
     <string name="add_btn">Add Emotion</string>
     <string name="emotion_panel_label">Emotions</string>
     <string name="emotion_pie_label">Pie chart</string>
+    <string name="op_success">Emotion added</string>
 </resources>

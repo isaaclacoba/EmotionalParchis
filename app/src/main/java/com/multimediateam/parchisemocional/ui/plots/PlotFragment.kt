@@ -1,7 +1,6 @@
 package com.multimediateam.parchisemocional.ui.plots
 
 import android.graphics.Color
-import android.graphics.Typeface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.SpannableString
@@ -12,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.viewModels
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
@@ -21,11 +21,10 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
 import com.multimediateam.parchisemocional.R
+import com.multimediateam.parchisemocional.presenter.ParchisViewModel
 import kotlinx.android.synthetic.main.plot_fragment.*
-import java.util.ArrayList
 
 class PlotFragment : Fragment(), OnChartValueSelectedListener {
     private val tfRegular by lazy {
@@ -40,11 +39,10 @@ class PlotFragment : Fragment(), OnChartValueSelectedListener {
         fun newInstance() = PlotFragment()
     }
 
+    private val viewModel: ParchisViewModel by viewModels()
 
     private val parties = arrayOf(
         "Anger", "Apathy", "Euphoria", "Relax")
-
-    private lateinit var viewModel: PlotViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -98,24 +96,21 @@ class PlotFragment : Fragment(), OnChartValueSelectedListener {
         l.yOffset = 0f
 
         // entry label styling
-
-        // entry label styling
-        emotion_pie_chart.setEntryLabelColor(Color.GRAY)
+        emotion_pie_chart.setEntryLabelColor(Color.WHITE)
         emotion_pie_chart.setEntryLabelTypeface(tfRegular)
-        emotion_pie_chart.setEntryLabelTextSize(12f)
+        emotion_pie_chart.setEntryLabelTextSize(13f)
         setData(4, 5f)
 
     }
 
     private fun generateCenterSpannableText(): SpannableString? {
-        //val s = SpannableString("EmotionParchis\nEmotion Pie")
         val s = SpannableString("Emotional Parchis\nResults")
         s.setSpan(RelativeSizeSpan(1.7f), 0, 17, 0)
         return s
     }
 
     private fun setData(count: Int, range: Float) {
-        val entries = ArrayList<PieEntry>()
+        val entries = mutableListOf<PieEntry>()
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
@@ -135,19 +130,17 @@ class PlotFragment : Fragment(), OnChartValueSelectedListener {
         dataSet.selectionShift = 5f
 
         // add a lot of colors
-        val colors = ArrayList<Int>()
-        for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
-        for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
-        for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
-        for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
-        for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
-        colors.add(ColorTemplate.getHoloBlue())
+        val colors = mutableListOf<Int>()
+        colors.add(Color.rgb(244,	68,	54	)) // Red
+        colors.add(Color.rgb(32,	151,	243	)) //Blue
+        colors.add(Color.rgb(213,	195,	48	)) //Yellow
+        colors.add(Color.rgb(76,	175,	81	)) // Green
         dataSet.colors = colors
-        //dataSet.setSelectionShift(0f);
+        dataSet.setSelectionShift(0f);
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
-        data.setValueTextSize(11f)
-        data.setValueTextColor(Color.BLACK)
+        data.setValueTextSize(20f)
+        data.setValueTextColor(Color.WHITE)
         data.setValueTypeface(tfLight)
         emotion_pie_chart.data = data
 
@@ -159,7 +152,6 @@ class PlotFragment : Fragment(), OnChartValueSelectedListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PlotViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
@@ -173,7 +165,7 @@ class PlotFragment : Fragment(), OnChartValueSelectedListener {
         Log.i(
             "VAL SELECTED",
             "Value: " + e.y + ", index: " + h!!.x
-                    + ", DataSet index: " + h!!.dataSetIndex
+                    + ", DataSet index: " + h.dataSetIndex
         )
     }
 

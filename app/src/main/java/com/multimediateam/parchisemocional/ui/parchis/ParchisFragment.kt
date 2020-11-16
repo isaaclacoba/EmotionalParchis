@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.multimediateam.parchisemocional.R
 import com.multimediateam.parchisemocional.presenter.ParchisViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.parchis_fragment.*
 
 @AndroidEntryPoint
 class ParchisFragment : Fragment() {
@@ -62,8 +64,16 @@ class ParchisFragment : Fragment() {
         }
 
         send_feeling_btn.setOnClickListener {
-            viewModel.sendEmotion()
+            if (parchis_point_iv.visibility == View.VISIBLE) {
+                viewModel.sendEmotion()
+            }
         }
+
+        viewModel.mResult.observe(viewLifecycleOwner, Observer { message -> createSnackBar(message) })
+    }
+
+    private fun createSnackBar(message: String) {
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT ).show()
     }
 
     private fun drawCircle(event: MotionEvent) {

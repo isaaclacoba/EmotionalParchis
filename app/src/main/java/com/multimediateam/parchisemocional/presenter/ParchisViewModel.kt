@@ -1,6 +1,7 @@
 package com.multimediateam.parchisemocional.presenter
 
 import android.content.Context
+import android.util.Log
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
@@ -18,6 +19,9 @@ class ParchisViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle):
     ViewModel(), MainContract.MainPresenter {
 
+    private val TAG = "ParchisViewModel"
+
+    val mResult = MutableLiveData<String>()
     val mEmotion: MutableLiveData<Emotion> =
         MutableLiveData<Emotion>(Emotion.createEmotion(0f, 0f))
 
@@ -29,7 +33,9 @@ class ParchisViewModel @ViewModelInject constructor(
         val emotion = mEmotion.value!!
 
         GlobalScope.launch {
-            mInteractor.addEmotion(emotion)
+            val result = mInteractor.addEmotion(emotion)
+            Log.i(TAG, "result: ${result.toString()}")
+            mResult.postValue(result.message)
         }
     }
 }

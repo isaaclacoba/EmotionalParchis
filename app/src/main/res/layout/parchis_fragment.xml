@@ -9,31 +9,36 @@
     tools:context=".ui.parchis.ParchisFragment">
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="5dp"/>
-    
+        app:layout_constraintGuide_begin="5dp" />
+
     <ImageView
         android:id="@+id/parchis_emotional_iv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="H,1:0.95"
-        
-        app:layout_constraintBottom_toTopOf="@+id/send_feeling_btn"
 
+        app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/parchis" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/send_feeling_btn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/add_btn"
         android:text="@string/add_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_goneMarginBottom="10dp" />
+        app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_insetEdge="bottom"
+        app:srcCompat="@drawable/ic_add_white_18dp" />
 
     <ImageView
         android:id="@+id/parchis_point_iv"
@@ -45,4 +50,12 @@
         app:layout_constraintStart_toStartOf="@+id/parchis_emotional_iv"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_fiber_manual_record_black_18dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.9"
+        android:orientation="horizontal"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
