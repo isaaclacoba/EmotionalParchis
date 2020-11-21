@@ -92,7 +92,7 @@ class PlotFragment : Fragment(), OnChartValueSelectedListener {
         // add a selection listener
         emotion_pie_chart.setOnChartValueSelectedListener(this)
 
-        emotion_pie_chart.animateY(1400, Easing.EaseInOutQuad)
+        emotion_pie_chart.animateY(1000, Easing.EaseInOutQuad)
 
         val l: Legend = emotion_pie_chart.legend
         l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
