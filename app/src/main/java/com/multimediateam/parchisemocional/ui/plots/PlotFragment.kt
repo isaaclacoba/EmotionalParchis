@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
@@ -23,9 +24,16 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.MPPointF
 import com.multimediateam.parchisemocional.R
+import com.multimediateam.parchisemocional.model.Emotion
 import com.multimediateam.parchisemocional.presenter.ParchisViewModel
+import com.multimediateam.parchisemocional.util.Color.BLUE_PARCHIS
+import com.multimediateam.parchisemocional.util.Color.GREEN_PARCHIS
+import com.multimediateam.parchisemocional.util.Color.RED_PARCHIS
+import com.multimediateam.parchisemocional.util.Color.YELLOW_PARCHIS
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.plot_fragment.*
 
+@AndroidEntryPoint
 class PlotFragment : Fragment(), OnChartValueSelectedListener {
     private val tfRegular by lazy {
         context?.let { ResourcesCompat.getFont(it, R.font.open_sans_regular) };
@@ -39,9 +47,9 @@ class PlotFragment : Fragment(), OnChartValueSelectedListener {
         fun newInstance() = PlotFragment()
     }
 
-    private val viewModel: ParchisViewModel by viewModels()
+    val viewModel: ParchisViewModel by viewModels()
 
-    private val parties = arrayOf(
+    private val emotionLabel = arrayOf(
         "Anger", "Apathy", "Euphoria", "Relax")
 
     override fun onCreateView(
@@ -99,8 +107,12 @@ class PlotFragment : Fragment(), OnChartValueSelectedListener {
         emotion_pie_chart.setEntryLabelColor(Color.WHITE)
         emotion_pie_chart.setEntryLabelTypeface(tfRegular)
         emotion_pie_chart.setEntryLabelTextSize(13f)
-        setData(4, 5f)
 
+        viewModel.mEmotionList.observe(viewLifecycleOwner, Observer { emotionList ->
+            setPieData(emotionList)
+        })
+
+        viewModel.getEmotionsAsync()
     }
 
     private fun generateCenterSpannableText(): SpannableString? {
@@ -109,34 +121,59 @@ class PlotFragment : Fragment(), OnChartValueSelectedListener {
         return s
     }
 
-    private fun setData(count: Int, range: Float) {
+
+    private fun getDataSet(emotions: List<Emotion>): PieDataSet {
         val entries = mutableListOf<PieEntry>()
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-        for (i in 0 until count) {
+        var emotionCounter = mutableListOf<Int>(0, 0, 0, 0)
+        for (emotion in emotions) {
+            if (emotion.energy_ > 0) {
+                if (emotion.feeling_ > 0) {
+                    emotionCounter[2]++
+                } else {
+                    emotionCounter[0]++
+                }
+            } else {
+                if (emotion.feeling_ > 0) {
+                    emotionCounter[3]++
+                } else {
+                    emotionCounter[1]++
+
+                }
+            }
+        }
+
+        for ((i, value) in emotionCounter.withIndex()) {
             entries.add(
                 PieEntry(
-                    (Math.random() * range + range / 5).toFloat(),
-                    parties.get(i % parties.size),
+                    value.toFloat(),
+                    emotionLabel[i],
                     resources.getDrawable(R.drawable.star)
                 )
             )
         }
+
         val dataSet = PieDataSet(entries, "Emotional Parchís")
         dataSet.setDrawIcons(false)
         dataSet.sliceSpace = 3f
         dataSet.iconsOffset = MPPointF(0F, 40F)
         dataSet.selectionShift = 5f
 
+        return dataSet
+    }
+
+    private fun setPieData(emotions: List<Emotion>) {
+        val dataSet = getDataSet(emotions)
+
         // add a lot of colors
-        val colors = mutableListOf<Int>()
-        colors.add(Color.rgb(244,	68,	54	)) // Red
-        colors.add(Color.rgb(32,	151,	243	)) //Blue
-        colors.add(Color.rgb(213,	195,	48	)) //Yellow
-        colors.add(Color.rgb(76,	175,	81	)) // Green
+        val colors = mutableListOf<Int>(RED_PARCHIS,
+            BLUE_PARCHIS, YELLOW_PARCHIS, GREEN_PARCHIS)
+
         dataSet.colors = colors
-        dataSet.setSelectionShift(0f);
+        dataSet.selectionShift = 0f;
+
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
         data.setValueTextSize(20f)

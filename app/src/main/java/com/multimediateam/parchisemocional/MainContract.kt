@@ -8,6 +8,7 @@ interface MainContract {
     interface MainPresenter {
         fun setEmotion(x: Float, y: Float)
         fun sendEmotion()
+        fun getEmotionsAsync()
     }
 
     interface MainInteractor {

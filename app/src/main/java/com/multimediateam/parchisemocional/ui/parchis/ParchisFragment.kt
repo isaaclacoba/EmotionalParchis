@@ -22,7 +22,6 @@ class ParchisFragment : Fragment() {
     //TODO: uncomment once we add NavController
     //private val args: AddParchisFragmentArgs by navArgs()
 
-
     companion object {
         fun newInstance() =
             ParchisFragment()
@@ -43,7 +42,6 @@ class ParchisFragment : Fragment() {
     }
 
     private fun initViews() {
-
         parchis_emotional_iv.setOnTouchListener { _, event ->
             Log.e(TAG,"event ${event.x}: ${event.y}")
             when (event.action) {

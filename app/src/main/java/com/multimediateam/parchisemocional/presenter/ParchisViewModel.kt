@@ -7,6 +7,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.multimediateam.parchisemocional.interactor.IMainInteractor
 import com.multimediateam.parchisemocional.MainContract
 import com.multimediateam.parchisemocional.model.Emotion
@@ -20,22 +21,26 @@ class ParchisViewModel @ViewModelInject constructor(
     ViewModel(), MainContract.MainPresenter {
 
     private val TAG = "ParchisViewModel"
-
+    private lateinit var mEmotion: Emotion
     val mResult = MutableLiveData<String>()
-    val mEmotion: MutableLiveData<Emotion> =
-        MutableLiveData<Emotion>(Emotion.createEmotion(0f, 0f))
+    val mEmotionList =
+        MutableLiveData<List<Emotion>>(mutableListOf(Emotion.createEmotion(0f, 0f)))
 
     override fun setEmotion(x: Float, y: Float) {
-        mEmotion.value = Emotion.createEmotion( x, y)
+        mEmotion = Emotion.createEmotion( x, y)
     }
 
     override fun sendEmotion() {
-        val emotion = mEmotion.value!!
-
         GlobalScope.launch {
-            val result = mInteractor.addEmotion(emotion)
+            val result = mInteractor.addEmotion(mEmotion)
             Log.i(TAG, "result: ${result.toString()}")
             mResult.postValue(result.message)
+        }
+    }
+
+    override fun getEmotionsAsync() {
+        GlobalScope.launch {
+            mEmotionList.postValue(mInteractor.getEmotions())
         }
     }
 }
