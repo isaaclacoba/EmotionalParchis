@@ -5,19 +5,15 @@ import com.multimediateam.parchisemocional.model.Emotion
 import com.multimediateam.parchisemocional.model.Result
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.After
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
 import org.mockito.*
-import org.mockito.BDDMockito.given
 
 class IMainInteractorTest {
     private lateinit var mInteractor: MainContract.MainInteractor
 
     @Mock lateinit var mRepository: MainContract.MainRepository
-
 
     @Before
     fun setUp() {

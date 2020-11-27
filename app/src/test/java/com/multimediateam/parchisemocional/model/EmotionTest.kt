@@ -5,7 +5,6 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
 
-
 class EmotionTest {
     private lateinit var mEmotion: Emotion
 

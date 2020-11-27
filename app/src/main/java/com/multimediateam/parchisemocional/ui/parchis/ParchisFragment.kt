@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.multimediateam.parchisemocional.R
-import com.multimediateam.parchisemocional.presenter.ParchisViewModel
+import com.multimediateam.parchisemocional.viewmodel.ParchisViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.parchis_fragment.*
 
@@ -46,7 +46,6 @@ class ParchisFragment : Fragment() {
             Log.e(TAG,"event ${event.x}: ${event.y}")
             when (event.action) {
                 MotionEvent.ACTION_DOWN,
-                MotionEvent.ACTION_MOVE,
                 MotionEvent.ACTION_HOVER_MOVE,
                 MotionEvent.ACTION_MOVE -> drawCircle(event)
                 else -> {

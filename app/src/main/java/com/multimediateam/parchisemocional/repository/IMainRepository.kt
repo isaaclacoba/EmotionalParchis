@@ -1,6 +1,7 @@
 package com.multimediateam.parchisemocional.repository
 
 import com.multimediateam.parchisemocional.MainContract
+import com.multimediateam.parchisemocional.di.DatabaseModule
 import com.multimediateam.parchisemocional.model.Emotion
 import com.multimediateam.parchisemocional.model.toDomain
 import com.multimediateam.parchisemocional.model.Result

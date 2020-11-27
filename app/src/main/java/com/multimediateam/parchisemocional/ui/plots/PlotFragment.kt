@@ -1,7 +1,6 @@
 package com.multimediateam.parchisemocional.ui.plots
 
 import android.graphics.Color
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.RelativeSizeSpan
@@ -25,7 +24,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.MPPointF
 import com.multimediateam.parchisemocional.R
 import com.multimediateam.parchisemocional.model.Emotion
-import com.multimediateam.parchisemocional.presenter.ParchisViewModel
+import com.multimediateam.parchisemocional.viewmodel.ParchisViewModel
 import com.multimediateam.parchisemocional.util.Color.BLUE_PARCHIS
 import com.multimediateam.parchisemocional.util.Color.GREEN_PARCHIS
 import com.multimediateam.parchisemocional.util.Color.RED_PARCHIS
